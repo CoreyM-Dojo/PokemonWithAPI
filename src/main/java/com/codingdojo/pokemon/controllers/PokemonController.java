@@ -79,7 +79,11 @@ public class PokemonController {
 		String test = ApiController.getPokemon(pokemon.toLowerCase());
 		if (test.equals("Something went wrong") || test.equals("Not Found")) {
 			flashMessages.addFlashAttribute("message","Check your spelling, that may have been an incorrect entry");
-			return "redirect:/pokemon/search?pokemon=" + session.getAttribute("pokemon");
+			if (session.getAttribute("pokemon") != null) {
+				
+				return "redirect:/pokemon/search?pokemon=" + session.getAttribute("pokemon");
+			}
+			return "redirect:/";
 		}
 		session.setAttribute("pokemon", pokemon );
 		JSONObject json = new JSONObject(test);

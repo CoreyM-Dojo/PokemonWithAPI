@@ -1,6 +1,8 @@
 package com.codingdojo.pokemon.controllers;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.codingdojo.pokemon.services.PokemonService;
-import com.codingdojo.pokemon.controllers.ApiController;
 
 @Controller
 public class HomeController {
@@ -21,7 +22,8 @@ public class HomeController {
 	
 	
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
+		session.removeAttribute("pokemon");
 		ArrayList<Object> pokemon = new ArrayList<>();
 		JSONObject json = new JSONObject(ApiController.getApi());
 		System.out.println(json.getJSONArray("results"));

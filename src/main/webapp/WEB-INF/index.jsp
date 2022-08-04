@@ -25,6 +25,9 @@
 					<input class="form-control" type="text" name="pokemon" />
 				</form>
 			</div>
+				<c:if test="${message.length() > 0}">				
+					<h4 class="text-danger text-center bg-light mt-3 p-2">${message }</h4>
+				</c:if>
 			<div class="card-body">
 				<a href="/pokemon/new" class="btn btn-success">Add Pokemon</a> 
 				<a href="/trainer/new" class="btn btn-success">Add Trainer</a>
