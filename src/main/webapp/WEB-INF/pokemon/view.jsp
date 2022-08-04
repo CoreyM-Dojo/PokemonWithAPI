@@ -18,18 +18,28 @@
 </head>
 <body class="bg-dark">
 	<div class="card bg-dark text-danger d-flex flex-column ">
-		<div class="card-header text-warning bg-danger d-flex justify-content-between align-items-center">
+		<div
+			class="card-header text-warning d-flex justify-content-between align-items-center flex-wrap bg-danger bg-gradient"">
 			<h2>Who's that pokemon?</h2>
 			<a href="/">Home</a>
 		</div>
+			<form action="/pokemon/search">
+				<input class="form-control  text-center" type="text" name="pokemon" placeholder="Search for another pokemon?" />
+			</form>
+				<c:if test="${message.length() > 0}">				
+					<h4 class="text-danger text-center bg-light mt-3 p-2">${message }</h4>
+				</c:if>
 		<div class="card-body">
-			<div class="d-flex flex-column align-items-center justify-content-center">			
+			<div
+				class="d-flex flex-column align-items-center justify-content-center">
 				<h1 class="card-title">${poke.get("name").substring(0,1).toUpperCase().concat(poke.get("name").substring(1))}</h1>
-				<img width=300 src="${poke.get('sprites').get('front_default') }" alt="" />
+				<img width=300
+					src="${poke.get('sprites').get('other').get('official-artwork').get('front_default') }"
+					alt="" />
 			</div>
 			<h3>Abilities</h3>
-			<div class="col-5 mb-3">			
-				<select class="form-control bg-dark text-info">			
+			<div class="col-5 mb-3">
+				<select class="form-control bg-dark text-info">
 					<c:forEach var="ab" items="${abilities }">
 						<option>${ab.get("ability").get("name")}</option>
 					</c:forEach>

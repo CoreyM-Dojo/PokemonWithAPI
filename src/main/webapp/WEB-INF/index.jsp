@@ -19,8 +19,12 @@
 <body class="bg-dark">
 	<div class="container bg-dark">
 		<div class="card bg-dark">
-			<div class="card-header text-warning bg-danger">Whos that
-				pokemon?</div>
+			<div class="card-header text-warning bg-danger">
+				<h2>Whos that pokemon?</h2>
+				<form action="/pokemon/search">
+					<input class="form-control" type="text" name="pokemon" />
+				</form>
+			</div>
 			<div class="card-body">
 				<a href="/pokemon/new" class="btn btn-success">Add Pokemon</a> 
 				<a href="/trainer/new" class="btn btn-success">Add Trainer</a>
@@ -29,11 +33,7 @@
 
 			<div class="card-footer text-muted">2 days ago</div>
 		</div>
-		<div class="container">
-			<form action="/pokemon/search">
-				<input type="text" name="pokemon" />
-			</form>
-		</div>
+		
 	</div>
 </body>
 </html>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingdojo.pokemon.models.Pokemon;
 import com.codingdojo.pokemon.services.PokemonService;
@@ -74,8 +75,14 @@ public class PokemonController {
 	
 	
 	@GetMapping("/search")
-	public String viewPokemon(@RequestParam String pokemon, Model model) {
-		JSONObject json = new JSONObject(ApiController.getPokemon(pokemon));
+	public String viewPokemon(@RequestParam String pokemon, Model model, RedirectAttributes flashMessages, HttpSession session) {
+		String test = ApiController.getPokemon(pokemon.toLowerCase());
+		if (test.equals("Something went wrong") || test.equals("Not Found")) {
+			flashMessages.addFlashAttribute("message","Check your spelling, that may have been an incorrect entry");
+			return "redirect:/pokemon/search?pokemon=" + session.getAttribute("pokemon");
+		}
+		session.setAttribute("pokemon", pokemon );
+		JSONObject json = new JSONObject(test);
 		ArrayList<JSONObject> abilities = new ArrayList<>();
 		ArrayList<JSONObject> stats = new ArrayList<>();
 		
